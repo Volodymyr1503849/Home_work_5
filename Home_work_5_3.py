@@ -1,5 +1,5 @@
 import sys
-from pathlib import Path
+from pathlib import PurePath , Path
 
 def parse_log_line(full_text: str):
     list_of_dict = []
@@ -38,9 +38,9 @@ def display_log_counts(counts: dict):
 
 def main():
         try:
-            file = Path(sys.argv[0])
+            file = Path(sys.argv[1])
             return load_logs(file)
         except UnicodeDecodeError:
             return f"Put correct file" 
 if __name__ == "__main__":
-    main()
+   print( main())

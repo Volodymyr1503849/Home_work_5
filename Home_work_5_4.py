@@ -7,8 +7,12 @@ def input_error(func):
     def inner(*args, **kwargs):
         try:
             return func(*args, **kwargs)
-        except ValueError  :
+        except ValueError   :
             return "Give me name and phone please"
+        except IndexError:
+            return "Give me phone and name please"
+        except KeyError:
+            return "Enter user name"
     return inner
 
 @input_error
@@ -17,38 +21,21 @@ def add_contact(args, contacts):
     contacts[name] = phone
     return "Contact added."
 
-def input_error_1(func):
-    def inner(*args, **kwargs):
-        try:
-            return func(*args, **kwargs)
-        except ValueError  :
-            return "Give me correct name and phone please to change information!."
-
-    return inner
-
-@input_error_1
+@input_error
 def contact_added(args,contacts):
     name, phone = args 
     contacts[name] = phone
     return "Contact updated"
 
-def input_error_2(func):
-    def inner(*args, **kwargs):
-        try:
-            return func(*args, **kwargs)
-        except IndexError :
-            return "Give me correct  phone and name please to check information!."
-        
-    return inner
-
-@input_error_2        
+@input_error       
 def show_phone(args,contacts):
     name = args[0]
     try:
         return contacts[name]
     except:
-        return f"User not found!"  
-    
+        return f"User not found!"
+      
+@input_error       
 def show_all(contacts):
     return contacts
 
